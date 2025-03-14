@@ -1,4 +1,4 @@
-# Upper Limb Model - MATLAB/Simulink
+# Upper Extremity Model - MATLAB/Simulink
 
 This repository provides the upper limb model developed in MATLAB/Simulink as part of paper "Optimizing Upper Limb Exoskeleton Efficiency: A Conceptual Approach Using Active-Passive Elements for Reduced Energy Demand". It includes all necessary files to run simulations of the upper limb dynamics.
 
