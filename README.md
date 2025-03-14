@@ -37,5 +37,5 @@ This repository provides the upper limb model developed in MATLAB/Simulink as pa
 
 ## Contact
 
-For any questions regarding this model, please contact the authors of the corresponding publication.
+For any questions regarding this model, please contact us.
 
