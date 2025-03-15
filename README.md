@@ -8,8 +8,8 @@ This repository provides the upper limb model developed in MATLAB/Simulink as pa
 📂 Upper-Extremity-Model
 ├── UpperLimb_Main.m                  # Adds required directories to MATLAB's path and sets up the environment
 ├── UpperLimbExo_Parameters.m         # Defines the parameters for the upper limb model
-├── Upper Limb Models/                # Contains submodels of the upper limb
-├── Equation of Motions/              # Includes muscle geometry equations used in the simulation and optimization
+├── UpperLimb_models/                # Contains submodels of the upper limb
+├── Equations_of_Motion/              # Includes muscle geometry equations used in the simulation and optimization
 └── UpperLimb_planar.slx              # Primary Simulink model that loads additional models
 ```
 
