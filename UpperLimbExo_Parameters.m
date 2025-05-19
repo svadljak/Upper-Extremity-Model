@@ -1,18 +1,18 @@
+Parameters_OpenSim;
+
 %% SKELETAL PARAMETERS
     g = 9.81;
 
     % Lengths
-        L2 = 0.3196;
-        L3 = 0.246;
-        LS2 = 0.1393;   % vzdalenost teziste 1 od rotacni vazby 01
-        LS3 = 0.106;   % vzdalenost teziste 2 od rotacni vazby 12
-        GHrad = 0.02;   % radius of glenohumeral joint
+        L2 = 0.29; % 3D z OpenSimu ~~ 2D z Opensimu promitnute
+        LS2 = L2/2;
+        LS3 = LS2;
+        L3 = L2; % for animation ONLY
         HUrad = 0.02;   % radius of humeroulnar joints
     
-
     % Mass parameters
-        m2 = 1.96;  % humerus [kg]
-        m3 = 1.12;  % ulna+radius [kg]
+        m2 = 2.0519;
+        m3 = 0.5464 + 0.5464;  % ulna+radius [kg]
         I2S2 = 0.0208;
         I3S3 = 0.006;
            
@@ -28,166 +28,160 @@
 %% MUSCLE PARAMETERS
     tauD = 50/1000; % 50 ms
     tauA = 15/1000; % 10 ms
-
+    
+    str_names = {'M_CORB', 'M_TMAJ', 'M_DELT', 'M_TRIPB.CMED', 'M_TRIPB.CLAT', 'M_TRIPB.CLONG'};
 
     % M. CORACOBRACHIALIS
+        M_CORB.ratio = muscles.(selected_muscles{1}).ratio;
         % Origin - Insertion
-            M_CORB.x1B = 0.0296;
-            M_CORB.y1B = 0;
-            M_CORB.x2A = 0.1533;
-            M_CORB.y2A = 0;
+            M_CORB.x1B = muscles.(selected_muscles{1}).attachments.P1.x;
+            M_CORB.y1B = muscles.(selected_muscles{1}).attachments.P1.y;
+            M_CORB.x2A = muscles.(selected_muscles{1}).attachments.P2.x;
+            M_CORB.y2A = muscles.(selected_muscles{1}).attachments.P2.y;
         % Muscle length, force
-            M_CORB.LM0 = 1.4*0.0683; % 1.4*
-            M_CORB.LTs = 0.4*0.104; % 0.4*
-            M_CORB.alpha0 = 0;        
-            M_CORB.FM0 = 648.2;  % [N]
+            M_CORB.LM0 = muscles.(selected_muscles{1}).LM0;
+            M_CORB.LTs = muscles.(selected_muscles{1}).LTs;
+            M_CORB.alpha0 = muscles.(selected_muscles{1}).alpha0;      
+            M_CORB.FM0 = muscles.(selected_muscles{1}).FM0;
 
     % M. TERES MAJOR
+        M_TMAJ.ratio = muscles.(selected_muscles{2}).ratio;
         % Origin - Insertion
-            M_TMAJ.x1B = -0.0583;
-            M_TMAJ.y1B = -0.0733;
-            M_TMAJ.x2A = 0.0421;
-            M_TMAJ.y2A = 0;
+            M_TMAJ.x1B = muscles.(selected_muscles{2}).attachments.P1.x;
+            M_TMAJ.y1B = muscles.(selected_muscles{2}).attachments.P1.y;
+            M_TMAJ.x2A = muscles.(selected_muscles{2}).attachments.P2.x;
+            M_TMAJ.y2A = muscles.(selected_muscles{2}).attachments.P2.y;
         % Muscle length, force
-            M_TMAJ.LM0 = 0.65*0.141; % 0.65*
-            M_TMAJ.LTs = 1*0.006; % 1*
-            M_TMAJ.alpha0 = 0;
-            M_TMAJ.FM0 = 851.2;  % [N]
+            M_TMAJ.LM0 = muscles.(selected_muscles{2}).LM0;
+            M_TMAJ.LTs = muscles.(selected_muscles{2}).LTs;
+            M_TMAJ.alpha0 = muscles.(selected_muscles{2}).alpha0; 
+            M_TMAJ.FM0 = muscles.(selected_muscles{2}).FM0;
 
 
     % M. DELTOIDEUS - pars clavicuralis
+        M_DELT.ratio = muscles.(selected_muscles{3}).ratio;
         % Origin - Insertion
-            M_DELT.x1B = 0.0396;
-            M_DELT.y1B = 0.0283;
-            M_DELT.x2A = 0.1091;
-            M_DELT.y2A = 0;
+            M_DELT.x1B = muscles.(selected_muscles{3}).attachments.P1.x;
+            M_DELT.y1B = muscles.(selected_muscles{3}).attachments.P1.y;
+            M_DELT.x2A = muscles.(selected_muscles{3}).attachments.P2.x;
+            M_DELT.y2A = muscles.(selected_muscles{3}).attachments.P2.y;
         % Muscle length, force
-            M_DELT.LM0 = 0.8*0.0949; % 0.8*
-            M_DELT.LTs = 0.4*0.088; % 0.4*
-            M_DELT.alpha0 = 5*pi/180; % 0
-            M_DELT.FM0 = 707.7;
+            M_DELT.LM0 = muscles.(selected_muscles{3}).LM0;
+            M_DELT.LTs = muscles.(selected_muscles{3}).LTs;
+            M_DELT.alpha0 = muscles.(selected_muscles{3}).alpha0;
+            M_DELT.FM0 = muscles.(selected_muscles{3}).FM0;
 
 
     % M. TRICEPS BRACHII
         r = HUrad;
-        % M_TRIPB.CMED.r = r;
-
         % Caput mediale
+            M_TRIPB.CMED.ratio = muscles.(selected_muscles{4}).ratio;
             % Origin - Insertion
-                M_TRIPB.CMED.y2B = 0;
-                M_TRIPB.CMED.x2B = 0.1417;
-                M_TRIPB.CMED.x3A = 0.0362;
-                M_TRIPB.CMED.y3A = 0;
+                M_TRIPB.CMED.x2B = muscles.(selected_muscles{4}).attachments.P1.x;
+                M_TRIPB.CMED.y2B = muscles.(selected_muscles{4}).attachments.P1.y;
+                M_TRIPB.CMED.x3A = muscles.(selected_muscles{4}).attachments.P2.x;
+                M_TRIPB.CMED.y3A = muscles.(selected_muscles{4}).attachments.P2.y;
+                M_TRIPB.CMED.x3A = 0.01;
+                M_TRIPB.CMED.y3A = - sqrt(r^2 - M_TRIPB.CMED.x3A^2);
             % Wrapping - circular
+                % r = sqrt(M_TRIPB.CMED.x3A^2 + M_TRIPB.CMED.y3A^2);
                 % W2 - humerus
                     M_TRIPB.CMED.alpha2 = acos(r/(L2-M_TRIPB.CMED.x2B));
                     M_TRIPB.CMED.x2W2 = L2 - r*r/(L2-M_TRIPB.CMED.x2B);
                     M_TRIPB.CMED.y2W2 = -r*sin(M_TRIPB.CMED.alpha2);
-                % W3 - ulna-radius
-                    M_TRIPB.CMED.alpha3 = acos(r/M_TRIPB.CMED.x3A);
-                    M_TRIPB.CMED.x3W3 = r*r/M_TRIPB.CMED.x3A;
-                    M_TRIPB.CMED.y3W3 = -r*sin(M_TRIPB.CMED.alpha3);
             % Muscle length, force
-                M_TRIPB.CMED.LM0 = 1*0.0584; % 1.27*0.0584
-                M_TRIPB.CMED.LTs = 1.5*0.1168; % 1.5*0.1168
-                M_TRIPB.CMED.alpha0 = 0;
-                M_TRIPB.CMED.FM0 = 1580.6/3;  % [N]
+                M_TRIPB.CMED.LM0 = muscles.(selected_muscles{4}).LM0;
+                M_TRIPB.CMED.LTs = muscles.(selected_muscles{4}).LTs;
+                M_TRIPB.CMED.alpha0 = muscles.(selected_muscles{4}).alpha0;
+                M_TRIPB.CMED.FM0 = muscles.(selected_muscles{4}).FM0;
 
 
         % Caput laterale
+            M_TRIPB.CLAT.ratio = muscles.(selected_muscles{5}).ratio;
             % Origin - insertion
-                M_TRIPB.CLAT.x2B = M_TRIPB.CMED.x2B/2;
-                M_TRIPB.CLAT.y2B = M_TRIPB.CMED.y2B;
+                M_TRIPB.CLAT.x2B = muscles.(selected_muscles{5}).attachments.P1.x;
+                M_TRIPB.CLAT.y2B = muscles.(selected_muscles{5}).attachments.P1.y;
+                M_TRIPB.CLAT.x3A = muscles.(selected_muscles{5}).attachments.P2.x;
+                M_TRIPB.CLAT.y3A = muscles.(selected_muscles{5}).attachments.P2.y;
                 M_TRIPB.CLAT.x3A = M_TRIPB.CMED.x3A;
                 M_TRIPB.CLAT.y3A = M_TRIPB.CMED.y3A;
             % Wrapping - circular
+                % r = sqrt(M_TRIPB.CLAT.x3A^2 + M_TRIPB.CLAT.y3A^2);
                 % W2 - humerus
                     M_TRIPB.CLAT.alpha2 = acos(r/(L2-M_TRIPB.CLAT.x2B));
                     M_TRIPB.CLAT.x2W2 = L2 - r*r/(L2-M_TRIPB.CLAT.x2B);
                     M_TRIPB.CLAT.y2W2 = -r*sin(M_TRIPB.CLAT.alpha2);
-                % W3 - ulna-radius
-                    M_TRIPB.CLAT.alpha3 = acos(r/M_TRIPB.CLAT.x3A);
-                    M_TRIPB.CLAT.x3W3 = r*r/M_TRIPB.CLAT.x3A;
-                    M_TRIPB.CLAT.y3W3 = -r*sin(M_TRIPB.CLAT.alpha3);
             % Muscle length, force
-                M_TRIPB.CLAT.LM0 = 1*0.0881; % 1.45*0.0881
-                M_TRIPB.CLAT.LTs = 1.2*0.1762; % 0.65*0.1762
-                M_TRIPB.CLAT.alpha0 = 5*pi/180; % [rad]
-                M_TRIPB.CLAT.FM0 = 1580.6/3;  % [N]
+                M_TRIPB.CLAT.LM0 = muscles.(selected_muscles{5}).LM0;
+                M_TRIPB.CLAT.LTs = muscles.(selected_muscles{5}).LTs;
+                M_TRIPB.CLAT.alpha0 = muscles.(selected_muscles{5}).alpha0;
+                M_TRIPB.CLAT.FM0 = muscles.(selected_muscles{5}).FM0;
 
             
         % Caput longum
+            M_TRIPB.CLONG.ratio = muscles.(selected_muscles{6}).ratio;
             % Origin - insertion
-                M_TRIPB.CLONG.x1B = -0.0231;
-                M_TRIPB.CLONG.y1B = -0.0153;
+                M_TRIPB.CLONG.x1B = muscles.(selected_muscles{6}).attachments.P1.x;
+                M_TRIPB.CLONG.y1B = muscles.(selected_muscles{6}).attachments.P1.y;
+                M_TRIPB.CLONG.x3A = muscles.(selected_muscles{6}).attachments.P2.x;
+                M_TRIPB.CLONG.y3A = muscles.(selected_muscles{6}).attachments.P2.y;
                 M_TRIPB.CLONG.x3A = M_TRIPB.CMED.x3A;
                 M_TRIPB.CLONG.y3A = M_TRIPB.CMED.y3A;
-                % M_TRIPB.CLONG.r = HUrad;
             % Wrapping - circular
+                % r = sqrt(M_TRIPB.CLONG.x3A^2 + M_TRIPB.CLONG.y3A^2);
                 % W2 - humerus
                     M_TRIPB.CLONG.r1B = sqrt(M_TRIPB.CLONG.x1B^2 + M_TRIPB.CLONG.y1B^2);
                     M_TRIPB.CLONG.beta1 = atan(M_TRIPB.CLONG.x1B/M_TRIPB.CLONG.y1B);
-                % W3 - ulna-radius
-                    M_TRIPB.CLONG.alpha3 = acos(r/M_TRIPB.CLONG.x3A);
-                    M_TRIPB.CLONG.x3W3 = r*r/M_TRIPB.CLONG.x3A;
-                    M_TRIPB.CLONG.y3W3 = -r*sin(M_TRIPB.CLONG.alpha3);
             % Muscle length, force
-                M_TRIPB.CLONG.LM0 = 1.5*0.0969; % 1.2*0.0969
-                M_TRIPB.CLONG.LTs = 1*0.241; % 1*0.241
-                M_TRIPB.CLONG.alpha0 = 10*pi/180;
-                M_TRIPB.CLONG.FM0 = 1580.6/3;
+                M_TRIPB.CLONG.LM0 = muscles.(selected_muscles{6}).LM0;
+                M_TRIPB.CLONG.LTs = muscles.(selected_muscles{6}).LTs;
+                M_TRIPB.CLONG.alpha0 = muscles.(selected_muscles{6}).alpha0;
+                M_TRIPB.CLONG.FM0 = muscles.(selected_muscles{6}).FM0;
 
 
     % M. BICEPS BRACHII
+        M_BICB.ratio = muscles.(selected_muscles{7}).ratio;
         % Origin - insertion
-            M_BICB.x1B = 0.01;
-            M_BICB.y1B = 0.0355;
-            M_BICB.x3A = 0.0631;
-            M_BICB.y3A = 0;
+            M_BICB.x1B = muscles.(selected_muscles{7}).attachments.P1.x;
+            M_BICB.y1B = muscles.(selected_muscles{7}).attachments.P1.y;
+            M_BICB.x3A = muscles.(selected_muscles{7}).attachments.P2.x;
+            M_BICB.y3A = muscles.(selected_muscles{7}).attachments.P2.y;
         % Muscle length, force
-            M_BICB.LM0 = 1.4*0.1412; % 1.4*
-            M_BICB.LTs = 0.5*0.257; % 0.5*
-            M_BICB.alpha0 = 0;
-            M_BICB.FM0 = 485.8; % [N]
+            M_BICB.LM0 = muscles.(selected_muscles{7}).LM0;
+            M_BICB.LTs = muscles.(selected_muscles{7}).LTs;
+            M_BICB.alpha0 = muscles.(selected_muscles{7}).alpha0;
+            M_BICB.FM0 = muscles.(selected_muscles{7}).FM0;
 
 
     % M. BRACHIALIS
+        M_BRACH.ratio = muscles.(selected_muscles{8}).ratio;
         % Origin - insertion
-            M_BRACH.x3A = 0.025;
-            M_BRACH.y3A = 0;
-            M_BRACH.x2B = 0.2025;
-            M_BRACH.y2B = 0;
+            M_BRACH.x2B = muscles.(selected_muscles{8}).attachments.P1.x;
+            M_BRACH.y2B = muscles.(selected_muscles{8}).attachments.P1.y;
+            M_BRACH.x3A = muscles.(selected_muscles{8}).attachments.P2.x;
+            M_BRACH.y3A = muscles.(selected_muscles{8}).attachments.P2.y;
         % Muscle length, force
-            M_BRACH.LM0 = 1*0.0762; % 1*0.0762
-            M_BRACH.LTs = 0.275*0.1524; % 0.55*0.0762
-            M_BRACH.alpha0 = 0;
-            M_BRACH.FM0 = 1177.37;  % [N]
+            M_BRACH.LM0 = muscles.(selected_muscles{8}).LM0;
+            M_BRACH.LTs = muscles.(selected_muscles{8}).LTs;
+            M_BRACH.alpha0 = muscles.(selected_muscles{8}).alpha0;
+            M_BRACH.FM0 = muscles.(selected_muscles{8}).FM0;
 
 
 
     % VECTORS OF PARAMETERS
-        LM0 = [M_CORB.LM0; M_TMAJ.LM0; M_DELT.LM0; M_TRIPB.CMED.LM0; M_TRIPB.CLAT.LM0; M_TRIPB.CLONG.LM0; M_BICB.LM0; M_BRACH.LM0];
-        LTs = [M_CORB.LTs; M_TMAJ.LTs; M_DELT.LTs; M_TRIPB.CMED.LTs; M_TRIPB.CLAT.LTs;  M_TRIPB.CLONG.LTs; M_BICB.LTs; M_BRACH.LTs];
-        alpha0 = [M_CORB.alpha0; M_TMAJ.alpha0; M_DELT.alpha0; M_TRIPB.CMED.alpha0; M_TRIPB.CLAT.alpha0;  M_TRIPB.CLONG.alpha0; M_BICB.alpha0; M_BRACH.alpha0];
+        RATIO = [M_CORB.ratio; M_TMAJ.ratio; M_DELT.ratio; M_TRIPB.CMED.ratio; M_TRIPB.CLAT.ratio; M_TRIPB.CLONG.ratio; M_BICB.ratio; M_BRACH.ratio];
+        LM0 = RATIO.*[M_CORB.LM0; M_TMAJ.LM0; M_DELT.LM0; M_TRIPB.CMED.LM0; M_TRIPB.CLAT.LM0; M_TRIPB.CLONG.LM0; M_BICB.LM0; M_BRACH.LM0];
+        LTs = RATIO.*[M_CORB.LTs; M_TMAJ.LTs; M_DELT.LTs; M_TRIPB.CMED.LTs; M_TRIPB.CLAT.LTs;  M_TRIPB.CLONG.LTs; M_BICB.LTs; M_BRACH.LTs];
+        alpha0 = 180/pi*[M_CORB.alpha0; M_TMAJ.alpha0; M_DELT.alpha0; M_TRIPB.CMED.alpha0; M_TRIPB.CLAT.alpha0;  M_TRIPB.CLONG.alpha0; M_BICB.alpha0; M_BRACH.alpha0]*pi/180;
         FM0 = [M_CORB.FM0; M_TMAJ.FM0; M_DELT.FM0; M_TRIPB.CMED.FM0; M_TRIPB.CLAT.FM0; M_TRIPB.CLONG.FM0; M_BICB.FM0; M_BRACH.FM0];
-        % W = LM0.*sin(alpha0);
     
     % Injury
-        % zraneni = 0.7; % <0;1> = procentualni zraneni ruky
-        % zraneni = [0; 0; 0; 0; 0; 0; 0.9; 0.9];
+        % zraneni = [0.9; 0; 0.9; 0; 0; 0; 0.9; 0];
         zraneni = 0;
         FM0 = (1-zraneni).*FM0;
 
 
 %% SIMULATIONS
-    % Upper Limb boundaries
-        fi12ub = 0;
-        fi12lb = -0.9*pi/2;
-
-        fi23ub = 150/180*pi;
-        fi23lb = 8/180*pi;
-
-
     % Controller
         % Activation dynamics
             activ_dyn = 1; % ON / OFF
