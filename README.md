@@ -6,11 +6,13 @@ This repository provides the upper limb model developed in MATLAB/Simulink as pa
 
 ```
 📂 Upper-Extremity-Model
+├── Data_OpenSim/                     # Exported data from OpenSim
+├── Muscle Geometry/                  # Muscle geometry equations
+├── Optimization/                     # Optimization code for Computed Muscle Control
+├── Parameters_OpenSim                # Extracting parameters from exported data from OpenSim
 ├── UpperLimb_Main.m                  # Adds required directories to MATLAB's path and sets up the environment
-├── UpperLimbExo_Parameters.m         # Defines the parameters for the upper limb model
-├── UpperLimb_models/                # Contains submodels of the upper limb
-├── Equations_of_Motion/              # Includes muscle geometry equations used in the simulation and optimization
-└── UpperLimb_planar.slx              # Primary Simulink model that loads additional models
+├── UpperLimb_planar.slx              # Simulink file of planar upper limb model
+└── UpperLimbExo_Parameters.m         # Defines the parameters for the upper limb model
 ```
 
 ## Running the Simulation
@@ -18,7 +20,7 @@ This repository provides the upper limb model developed in MATLAB/Simulink as pa
 1. Open MATLAB.
 2. Run `UpperLimb_Main.m` to load parameters and set up the environment.
 3. Start the simulation:
-   - **Option 1:** Uncomment the `simOut = sim("UpperLimb_Planar.slx");` command in `UpperLimb_Main.m` and execute the script.
+   - **Option 1:** Uncomment the `out = sim("UpperLimb_Planar.slx");` command in `UpperLimb_Main.m` and execute the script.
    - **Option 2:** Run the simulation manually from the main Simulink model after executing `UpperLimb_Main.m`.
 
 ## Requirements
