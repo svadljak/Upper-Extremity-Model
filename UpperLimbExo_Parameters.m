@@ -4,10 +4,11 @@ Parameters_OpenSim;
     g = 9.81;
 
     % Lengths
-        L2 = 0.29; % 3D z OpenSimu ~~ 2D z Opensimu promitnute
+        L2 = 0.2908; % z OpenSimu
         LS2 = L2/2;
-        LS3 = LS2;
-        L3 = L2; % for animation ONLY
+        L3 = 0.236; % z OpenSimu
+        LS3 = L3/2;
+
         HUrad = 0.02;   % radius of humeroulnar joints
     
     % Mass parameters
@@ -176,7 +177,7 @@ Parameters_OpenSim;
         FM0 = [M_CORB.FM0; M_TMAJ.FM0; M_DELT.FM0; M_TRIPB.CMED.FM0; M_TRIPB.CLAT.FM0; M_TRIPB.CLONG.FM0; M_BICB.FM0; M_BRACH.FM0];
     
     % Injury
-        % zraneni = [0.9; 0; 0.9; 0; 0; 0; 0.9; 0];
+        % zraneni = [0; 0; 0; 0; 0; 0; 0.9; 0.9];
         zraneni = 0;
         FM0 = (1-zraneni).*FM0;
 
